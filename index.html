@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI calcultor</title>
+    <style>
+        body{
+            background-color: #e0e0e0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calck {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            height: 300px;
+            width: auto;
+            border-radius: 1rem;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            padding: 10px;
+            outline: none;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius:0.6rem;
+            font-family: Arial sans-serif ;
+            font-size: 1rem;
+            font-weight:550;
+        }
+        input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            transition: border-color 0.3s ease;
+        }
+        input::placeholder {
+            color: #888;
+            font-style: italic;
+        }
+        input:focus::placeholder {
+            transition: 0.3s ease;
+        }
+        #result {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #333;
+            font-weight:550;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius:0.5rem;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calck">
+            <h2>BMI Calculator</h2>
+            <input type="text" placeholder="Weight(kg)" id="Weight">
+            <input type="text" placeholder="Height(m)" id="Height">
+            <div id="result"></div>
+            <button id="btn">Calculate BMI</button>
+        </div>
+    </div>
+    <script>
+        let btn = document.getElementById("btn");
+        let weightInput = document.getElementById("Weight");
+        let heightInput = document.getElementById("Height");    
+        let resultDisplay = document.getElementById("result");
+        btn.addEventListener("click" , () => {
+          let w = parseFloat(weightInput.value);
+          let h = parseFloat(heightInput.value / 100);
+            if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+                resultDisplay.innerText = "Please enter valid weight and height.";
+                return;
+            }
+            let bmi = w / (h * h);
+            bmi = bmi.toFixed(2);
+            if (bmi < 18.5) {
+                 resultDisplay.innerText = `Your BMI is ${bmi}(Underweight)`;
+            }
+            else if(bmi >= 18.5 && bmi < 24.9) {
+                resultDisplay.innerText = `Your BMI is ${bmi}(Normal weight)`;
+            }
+            else if(bmi >= 25 && bmi < 29.9) {
+                resultDisplay.innerText = `Your BMI is ${bmi}(Overweight)`;
+            }
+            else {
+                if(bmi >= 30 && bmi < 34.9) {
+                    resultDisplay.innerText = `Your BMI is ${bmi}(Obesity Class I)`;
+                }
+                else if(bmi >= 35 && bmi < 39.9) {
+                    resultDisplay.innerText = `Your BMI is ${bmi}(Obesity Class II)`;
+                }
+                else if(bmi >= 40) {
+                    resultDisplay.innerText = `Your BMI is ${bmi}(Obesity Class III)`;
+                }
+            }
+           
+        }); 
+    </script>
+</body>
+</html>
